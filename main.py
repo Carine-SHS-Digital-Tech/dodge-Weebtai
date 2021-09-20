@@ -29,12 +29,18 @@ class FallingObject(pygame.sprite.Sprite):
             return newscore
         else:
             return oldscore
+    #def deleteApple(self):
+       #if self.rect.y :
+            #self.kill()
+
 
 class Character(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.Surface([50,68])
         self.image.set_colorkey(black)
+
+
 
         self.rect = self.image.get_rect()
         self.rect.x = 310
@@ -65,6 +71,9 @@ white    = ( 255, 255, 255)        # used throughout the game instead of using r
 font = pygame.font.Font(None, 36)
 
 # Define additional Functions and Procedures here
+pokemon = 0
+Ehp = 0
+
 allFallingObjects = pygame.sprite.Group()
 
 nextApple = pygame.time.get_ticks() + 2500
@@ -107,7 +116,19 @@ while done == False:
 
     collisions = pygame.sprite.groupcollide(allFallingObjects,charactersGroup,False,False)
     if len(collisions)>0:
+
+
+        pokemon = pokemon+1
+        print('you got a point!')
+
+
+    if pokemon >= 40:
+
         done = True
+
+    #display player health accor
+
+
 
     screen.blit(background_image, [0,0])
     allFallingObjects.draw(screen)
