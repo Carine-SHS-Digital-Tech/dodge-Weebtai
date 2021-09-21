@@ -29,9 +29,7 @@ class FallingObject(pygame.sprite.Sprite):
             return newscore
         else:
             return oldscore
-    #def deleteApple(self):
-       #if self.rect.y :
-            #self.kill()
+
 
 
 class Character(pygame.sprite.Sprite):
@@ -47,6 +45,9 @@ class Character(pygame.sprite.Sprite):
         self.rect.y = 420
 
         self.image.blit(pygame.image.load("Superhero.png"),(0,0))
+    #def deleteApple(self):
+       #if FallingObject.rect.y = Character.rect.y:
+            #self.kill()
 
 
 
@@ -66,13 +67,17 @@ pygame.display.set_caption("Dodge") # Name your window
 background_image = pygame.image.load("OrchardBackground.jpg").convert()
 done = False                                # Loop until the user clicks the close button.
 clock = pygame.time.Clock()                 # Used to manage how fast the screen updates
-black    = (   0,   0,   0)                 # Define some colors using rgb values.  These can be
+black    = (   0,   0,   0)    # Define some colors using rgb values.  These can be
+Blue    = (   0,   0,   255)
+green    = (   0,  255,   0)
+red    = (   255,   0,   0)
+purple    = (   130,   0,   130)
 white    = ( 255, 255, 255)        # used throughout the game instead of using rgb values.
 font = pygame.font.Font(None, 36)
 
 # Define additional Functions and Procedures here
-pokemon = 0
-Ehp = 0
+lp = 3
+lifepoints = (f'Lp:')
 
 allFallingObjects = pygame.sprite.Group()
 
@@ -85,6 +90,10 @@ charactersGroup.add(character)
 movement = 0
 
 score = 0
+#add abilities
+
+
+
 
 # -------- Main Program Loop -----------
 while done == False:
@@ -114,15 +123,13 @@ while done == False:
 
     character.moveCharacter(movement)
 
-    collisions = pygame.sprite.groupcollide(allFallingObjects,charactersGroup,False,False)
+    collisions = pygame.sprite.groupcollide(allFallingObjects,charactersGroup,True,False)
     if len(collisions)>0:
+        lp = lp-1
+        print(f'{lp}')
 
 
-        pokemon = pokemon+1
-        print('you got a point!')
-
-
-    if pokemon >= 40:
+    if lp == 0:
 
         done = True
 
@@ -135,6 +142,14 @@ while done == False:
     charactersGroup.draw(screen)
     textImg = font.render(str(score),1,white)
     screen.blit( textImg, (10,10) )
+    textImg = font.render(str(lifepoints),1,red)
+    screen.blit( textImg, (640,5) )
+    textImg = font.render(str(lp),1,red)
+    screen.blit( textImg, (680,5) )
+
+
+
+
     pygame.display.flip()                   # Go ahead and update the screen with what we've drawn.
     clock.tick(40)                          # Limit to 20 frames per second
 
