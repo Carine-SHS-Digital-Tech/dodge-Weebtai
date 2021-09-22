@@ -7,7 +7,7 @@ class FallingObject(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
         self.timecreated = pygame.time.get_ticks()
-        self.image = pygame.Surface([30,30])
+        self.image = pygame.Surface([100,100])
         self.image.set_colorkey(black)
 
         self.rect = self.image.get_rect()
@@ -80,8 +80,8 @@ lp = 3
 lifepoints = (f'Lp:')
 
 allFallingObjects = pygame.sprite.Group()
-
-nextApple = pygame.time.get_ticks() + 2500
+spdke = 2500
+nextApple = pygame.time.get_ticks() + spdke
 
 charactersGroup = pygame.sprite.Group()
 character = Character()
@@ -112,7 +112,7 @@ while done == False:
     # Update sprites here
     if pygame.time.get_ticks() > nextApple:
         nextObject = FallingObject()
-        nextObject.setImage("Apple.png")
+        nextObject.setImage("pixil-frame-0.png") # asndias bb ljnfvs bdisdfhjedf kfdsbnvhd fidgvdskhf bshel
         allFallingObjects.add(nextObject)
         nextApple = pygame.time.get_ticks() + 1500
 
